@@ -8,7 +8,6 @@ import numpy as np
 # Second argument is expected values of whole set
 INPUT_FILE_1 = sys.argv[1]
 INPUT_FILE_2 = sys.argv[2]
-RANDOM_SUBSET_AMOUNT = int(sys.argv[3])
 
 
 # Whole set
@@ -23,8 +22,6 @@ with open(INPUT_FILE_2) as f:
 
 # Divide the colorspace to n**3 cubes
 n = 2
-# Probability distribution for given subset
-probabilities = np.zeros(n**3)
 
 # Calculate chi-square for given subset
 O = np.zeros(n**3)
@@ -36,8 +33,6 @@ for colors in B:
         y = int(round(color[1]/255))
         z = int(round(color[2]/255))
         O[n**2*x + n*y + z] += 1
-        probabilities[n**2*x + n*y + z] += 1
-probabilities /= B_size
 
 for colors in A:
     for color in colors:
@@ -49,19 +44,7 @@ for colors in A:
 chi2 = sum([(o - e)**2 / e for o, e in zip(O, E)])
 
 
-# Calculate chi-squares for given subset and random subsets
-random_chi2s = np.zeros(RANDOM_SUBSET_AMOUNT)
-
-from collections import Counter
-for i in range(RANDOM_SUBSET_AMOUNT):
-    O = np.array(sorted(list(Counter(np.random.choice(n**3, B_size, p=probabilities)).items())))[:,1]
-    random_chi2s[i] = sum([(o - e)**2 / e for o, e in zip(O, E)])
-
-
 print("chi2 of given subset:", chi2)
-print("mean chi2 of random subsets", random_chi2s.mean())
-print("difference:", abs(chi2 - random_chi2s.mean()))
-
 
 # Plot colors
 #import matplotlib.pyplot as plt
