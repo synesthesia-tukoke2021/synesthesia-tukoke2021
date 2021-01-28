@@ -16,7 +16,7 @@ This directory contains 6 programs:
 ## Programs
 The following sections will describe the requirements, usage, and functionality of these programs.
 
-### chi-square.py
+### `chi-square.py`
 Calculates the chi-square value of the given subset compared to the other given dataset.
 
 #### Requirements
@@ -34,7 +34,7 @@ The chi-square algorithm is described on [this Wikipedia page](https://en.wikipe
 
 
 
-### k-means.py
+### `k-means.py`
 Divides the data into a given amount of clusters using the [k-means clustering algorithm](https://en.wikipedia.org/wiki/K-means_clustering).
 
 #### Requirements
@@ -53,7 +53,7 @@ The program uses scikit-learn's k-means algorithm to cluster the data and then p
 
 
 
-### silhouette.py
+### `silhouette.py`
 Calculates the optimal number of clusters to divide the data to using the [silhouette algorithm](https://en.wikipedia.org/wiki/Silhouette_(clustering)) and divides the data into that many clusters using the [k-means algorithm](https://en.wikipedia.org/wiki/K-means_clustering).
 
 #### Requirements
@@ -69,3 +69,7 @@ where `DATA` is the path to a JSON file containing the dataset, and `N` is the m
 
 #### How it works
 For each cluster amount from 2 to the given maximum cluster count the silhouette score is calculated and the scores logged. Then the cluster count with the best score logged and the k-means clustering plotted in a 3d plot.
+
+
+
+### `plotter.py`
